@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+	<title>Travelaid</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="/bootstrap.css">
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+  <script type="text/javascript">
+    
+    function setUserType(isAsk){
+      var u =  "<%= user.local.email %>";
+      var c = "<%= user.credits %>";
+    var userObject = { 'username': u, 'cred': c, 'userType': isAsk};
+    
+      localStorage.setItem('userObject', JSON.stringify(userObject));
+    }
+    
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+
+	<div class="page-header text-center">
+		<div class="container-fluid row">
+			<h1><span class="fa fa-user"></span><br><%= user.local.email %></h1>
+			<div class="container-fluid">
+        <p class="text-center" style="color:white"><a href="/logout" style="color:rgba(250,250,250, 0.7)">Logout</a></p>
+        
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+
+		<!-- LOCAL INFORMATION -->
+		<div class=" col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+			<div class="well">
+				<% if (user.local.email) { %>
+					<table class="table table-hover">
+						<tr><th>name</th><td colspan="2"><%= user.local.email %></td></tr>
+						<tr><th>credits</th><td><%= user.credits %></td><td><small><a href="/purchase" class="btn btn-primary"><span class="fa fa-plus"></span></a></small></td></tr>
+            <tr><th>current country</th><td colspan="2">Singapore</td></tr>
+
+					</table>
+					<div class="span7 text-center">
+            
+            <a href="/chat.html" onclick="setUserType(0)" class="btn btn-primary text-center">Ask</a>
+        	<a href="/chat.html" onclick="setUserType(1)" class="btn btn-primary text-center">Aid</a>
+            
+        </div>
+				<% } else { %>
+					<a href="/connect/local" class="btn btn-default">Connect Local</a>
+				<% } %>
+
+			</div>
+		</div>
+		
+	</div>
+
+
+</div>
+</body>
+</html>
